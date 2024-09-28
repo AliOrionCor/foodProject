@@ -8,10 +8,6 @@ app.use(express.json());
 
 app.use('/', async (req, res) => {
     try {
-       
-
-      
-      
         res.status(201).json({
             message: 'Food order App is running',
         });
@@ -21,7 +17,6 @@ app.use('/', async (req, res) => {
         });
     }
 });
-
 
 /*
 app.use('/submitForm', async (req, res) => {
