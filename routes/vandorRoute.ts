@@ -1,12 +1,12 @@
 import Express from "express";
+import { vandorLogin } from "../controllers";
 const router = Express.Router();
 
 
 
 
 // Vandor routes
-router.post('/findVendor' )
-
+router.post('/login', vandorLogin)
 
 
 
