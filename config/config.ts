@@ -9,4 +9,8 @@ config
     })
 
 
-export const MONGO_URI = process.env.DB_URL
+const MONGO_URL = process.env.DB_URL;
+const APP_SECRET_KEY = process.env.APP_SECRET;
+
+export { MONGO_URL, APP_SECRET_KEY };
+
