@@ -5,8 +5,11 @@ const router = Express.Router();
 
 
 
-// Vandor routes
+//Vandor routes
 router.post('/login', vandorLogin)
+router.get('/profile')
+router.patch('/profile')
+router.patch('/service')
 
 
 

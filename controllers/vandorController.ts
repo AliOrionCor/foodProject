@@ -10,17 +10,19 @@ export const vandorLogin = async (req, res) => {
         const existingVandor = await Vandor.findOne({ email: email })
 
         if (existingVandor !== null) {
+            const validation = await validatePassword(password, existingVandor.password, existingVandor.salt)
 
-            await validatePassword(password, existingVandor.password, existingVandor.salt)
+            if (validation) {
+                return res.json({
+                    message: `${existingVandor.name} Welcome to food order App`
+                })
+            }
 
             return res.json({
-                message: `${existingVandor.name} Welcome to food order App`
+                message: 'Login credentials not valid'
             })
-        }
 
-        return res.json({
-            message: 'Login credentials not valid'
-        })
+        }
     }
     catch (error) {
         return res.json({
