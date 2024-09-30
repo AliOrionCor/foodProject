@@ -13,7 +13,7 @@ interface vandorDoc extends Document {
     serviceAvailable: string,
     coverImage: [string],
     rating: number,
-   /*  foods: any */
+    /*  foods: any */
 }
 
 const vandorSchema = new Schema({
@@ -64,18 +64,29 @@ const vandorSchema = new Schema({
     rating: {
         type: Number
     },
-   /*  foods:
-        [{
-            type: mongoose.SchemaTypes.ObjectId,
-            ref: 'food'
-
-        }] */
-}, {
-    timestamps: true
-})
+    /*  foods:
+         [{
+             type: mongoose.SchemaTypes.ObjectId,
+             ref: 'food'
+ 
+         }] */
+},
+    {
+        toJSON: {
+            // transform  the returned data
+            transform(doc, ret) {
+                delete ret.password,
+                    delete ret.salt,
+                    delete ret.__v,
+                    delete ret.createdAt,
+                    delete ret.updatedAt
+            }
+        },
+        timestamps: true
+    })
 
 
 const Vandor = mongoose.model<vandorDoc>('vandor', vandorSchema)
 
 
-export {Vandor}
+export { Vandor }

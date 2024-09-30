@@ -2,8 +2,10 @@ import express from 'express';
 const app = express();
 import {adminRoute, vandorRoute } from './routes'
 import mongoose from 'mongoose';
+import morgan from 'morgan'
 import { MONGO_URI } from './config/config';
 app.use(express.json());
+app.use(morgan('dev'));
 
 
 app.use('/admin', adminRoute)
@@ -15,7 +17,7 @@ app.use('/vandor', vandorRoute)
 app.use('/', async (req, res) => {
     try {
         res.status(201).json({
-            message: 'Food order App is running',
+            message: 'Defualt APP route',
         });
     } catch (error) {
         res.status(201).json({
