@@ -10,10 +10,10 @@ interface vandorDoc extends Document {
     email: string,
     password: string,
     salt: string,
-    serviceAvailable: string,
+    serviceAvailable: boolean,
     coverImage: [string],
     rating: number,
-    /*  foods: any */
+    foods: any 
 }
 
 const vandorSchema = new Schema({
@@ -64,12 +64,12 @@ const vandorSchema = new Schema({
     rating: {
         type: Number
     },
-    /*  foods:
+    foods:
          [{
              type: mongoose.SchemaTypes.ObjectId,
              ref: 'food'
  
-         }] */
+         }]
 },
     {
         toJSON: {
