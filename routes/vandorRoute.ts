@@ -1,5 +1,6 @@
 import Express from "express";
-import { vandorLogin } from "../controllers";
+import { addFood, getFoods, getVandorProfile, updateVandorProfile, updateVandorService, vandorLogin } from "../controllers";
+import { authenticate } from "../middlewares";
 const router = Express.Router();
 
 
@@ -7,9 +8,20 @@ const router = Express.Router();
 
 //Vandor routes
 router.post('/login', vandorLogin)
-router.get('/profile')
-router.patch('/profile')
-router.patch('/service')
+
+// Use this way or authenticated before any route  as mention following routes
+//router.use(authenticate)
+
+router.get('/profile', authenticate , getVandorProfile)
+
+router.patch('/updateProfile',authenticate, updateVandorProfile)
+
+router.patch('/service',authenticate, updateVandorService)
+
+
+router.post('/addFood', authenticate,  addFood)
+
+router.get('/getFoods', authenticate, getFoods)
 
 
 
@@ -17,9 +29,6 @@ router.patch('/service')
 
 
 
-
-
-
-
+  
 
 export { router as vandorRoute }

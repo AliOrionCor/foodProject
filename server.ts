@@ -3,7 +3,7 @@ const app = express();
 import {adminRoute, vandorRoute } from './routes'
 import mongoose from 'mongoose';
 import morgan from 'morgan'
-import { MONGO_URI } from './config/config';
+import { MONGO_URL } from './config/config';
 app.use(express.json());
 app.use(morgan('dev'));
 
@@ -27,7 +27,7 @@ app.use('/', async (req, res) => {
 });
 
 
-mongoose.connect(MONGO_URI)
+mongoose.connect(MONGO_URL)
     .then(() => {
         console.log('Connected to MongoDB');
     })

@@ -29,6 +29,7 @@ export const createVendor = async (req, res) => {
             coverImage: [],
             rating: 0,
             serviceAvailable: false,
+            foods:[]
 
         })
 
