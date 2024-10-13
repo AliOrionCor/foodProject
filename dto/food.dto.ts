@@ -6,5 +6,4 @@ export interface createFoodInter{
     foodType: string,
     readyTime: string,
     price: number
-
 }
