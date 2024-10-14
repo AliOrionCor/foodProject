@@ -55,12 +55,10 @@ export const getVandorProfile = async (req, res) => {
             message: error.message
         })
     }
-
-
 }
+
 export const updateVandorProfile = async (req, res) => {
     try {
-
         const { name, address, phone, foodType } = <updateProfileInter>req.body
         const user = req.user;
         if (user) {
@@ -84,7 +82,6 @@ export const updateVandorProfile = async (req, res) => {
         return res.json({
             message: 'Vandor information not found'
         })
-
     }
     catch (error) {
         return res.json({
@@ -134,6 +131,10 @@ export const addFood = async (req, res) => {
 
             if (vandor !== null) {
 
+                const files = req.files as [Express.Multer.File];
+
+                let imageName = files.map((file) => file.filename);
+
                 const createFood = await Food.create({
                     vandorId: vandor._id,
                     name: name,
@@ -142,7 +143,7 @@ export const addFood = async (req, res) => {
                     foodType: foodType,
                     readyTime: readyTime,
                     price: price,
-                    images: ['helload']
+                    images: imageName
                 })
 
                 // this line pushes newly created food Id into vandor table
@@ -154,8 +155,6 @@ export const addFood = async (req, res) => {
                     data: result
                 })
             }
-
-
 
         }
         return res.json({
@@ -169,7 +168,6 @@ export const addFood = async (req, res) => {
     }
 }
 
-
 export const getFoods = async (req, res) => {
     try {
         const user = req.user;
@@ -180,7 +178,6 @@ export const getFoods = async (req, res) => {
                     message: 'Food Access Successfull',
                     data: foods
                 })
-
             }
             return res.json({
                 message: 'No Food available'
@@ -193,3 +190,36 @@ export const getFoods = async (req, res) => {
         })
     }
 }
+export const addCoverImage = async (req, res) => {
+    try {
+        const user = req.user;
+        if (user) {
+
+            const vandor = await Vandor.findOne({ _id: user._id })
+
+            if (vandor !== null) {
+
+                const files = req.files as [Express.Multer.File];
+                let profilePic = files.map((file) => file.filename);
+
+                vandor.coverImage.push(...profilePic);
+                const result = await vandor.save();
+
+                return res.json({
+                    message: 'cover image added',
+                    data: result
+                })
+            }
+
+        }
+        return res.json({
+            message: 'Vandor information not found'
+        })
+    }
+    catch (error) {
+        return res.json({
+            message: error.message
+        })
+    }
+}
+
