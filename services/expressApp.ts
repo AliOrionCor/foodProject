@@ -1,5 +1,5 @@
 import express, { Application } from 'express';
-import { adminRoute, vandorRoute , shoppingRoute } from '../routes'
+import { adminRoute, vandorRoute, shoppingRoute } from '../routes'
 import morgan from 'morgan'
 import path from 'path';
 
@@ -13,8 +13,8 @@ export default async (app: Application) => {
         app.use('/shopping', shoppingRoute);
 
         app.use('/images', express.static(path.join(__dirname, 'images')))
-        
-        
+
+
         // Defualt application route
         app.use('/', async (req, res) => {
             try {
@@ -29,7 +29,7 @@ export default async (app: Application) => {
         });
 
         return app
-    } 
+    }
     catch (error) {
         return error.message
 
